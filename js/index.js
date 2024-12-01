@@ -5213,12 +5213,6 @@ var $author$project$Data$Puzzle$allPuzzles = _List_fromArray(
 			['apple'])
 	},
 		{
-		clue: 'Read me',
-		seed: 0,
-		words: _List_fromArray(
-			['novella', 'article', 'essay'])
-	},
-		{
 		clue: 'Mistakes were made',
 		seed: 0,
 		words: _List_fromArray(
@@ -5253,6 +5247,12 @@ var $author$project$Data$Puzzle$allPuzzles = _List_fromArray(
 		seed: 0,
 		words: _List_fromArray(
 			['slash', 'hashtag', 'greaterthan'])
+	},
+		{
+		clue: 'People read me',
+		seed: 0,
+		words: _List_fromArray(
+			['novella', 'article', 'essay'])
 	}
 	]);
 var $author$project$Puzzle$defaultPuzzle = {
