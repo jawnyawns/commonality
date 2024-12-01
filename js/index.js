@@ -5202,6 +5202,8 @@ var $author$project$Main$Loaded = function (a) {
 var $author$project$Main$PuzzleMsg = function (a) {
 	return {$: 'PuzzleMsg', a: a};
 };
+var $elm$json$Json$Decode$decodeValue = _Json_run;
+var $elm$json$Json$Decode$field = _Json_decodeField;
 var $author$project$Data$Puzzle$allPuzzles = _List_fromArray(
 	[
 		{
@@ -5253,6 +5255,41 @@ var $author$project$Puzzle$defaultPuzzle = {
 	words: _List_fromArray(
 		['runtime', 'error'])
 };
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
+		}
+	});
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm_community$list_extra$List$Extra$getAt = F2(
+	function (idx, xs) {
+		return (idx < 0) ? $elm$core$Maybe$Nothing : $elm$core$List$head(
+			A2($elm$core$List$drop, idx, xs));
+	});
 var $elm$random$Random$Seed = F2(
 	function (a, b) {
 		return {$: 'Seed', a: a, b: b};
@@ -5272,197 +5309,6 @@ var $elm$random$Random$initialSeed = function (x) {
 	return $elm$random$Random$next(
 		A2($elm$random$Random$Seed, state2, incr));
 };
-var $elm$core$List$takeReverse = F3(
-	function (n, list, kept) {
-		takeReverse:
-		while (true) {
-			if (n <= 0) {
-				return kept;
-			} else {
-				if (!list.b) {
-					return kept;
-				} else {
-					var x = list.a;
-					var xs = list.b;
-					var $temp$n = n - 1,
-						$temp$list = xs,
-						$temp$kept = A2($elm$core$List$cons, x, kept);
-					n = $temp$n;
-					list = $temp$list;
-					kept = $temp$kept;
-					continue takeReverse;
-				}
-			}
-		}
-	});
-var $elm$core$List$takeTailRec = F2(
-	function (n, list) {
-		return $elm$core$List$reverse(
-			A3($elm$core$List$takeReverse, n, list, _List_Nil));
-	});
-var $elm$core$List$takeFast = F3(
-	function (ctr, n, list) {
-		if (n <= 0) {
-			return _List_Nil;
-		} else {
-			var _v0 = _Utils_Tuple2(n, list);
-			_v0$1:
-			while (true) {
-				_v0$5:
-				while (true) {
-					if (!_v0.b.b) {
-						return list;
-					} else {
-						if (_v0.b.b.b) {
-							switch (_v0.a) {
-								case 1:
-									break _v0$1;
-								case 2:
-									var _v2 = _v0.b;
-									var x = _v2.a;
-									var _v3 = _v2.b;
-									var y = _v3.a;
-									return _List_fromArray(
-										[x, y]);
-								case 3:
-									if (_v0.b.b.b.b) {
-										var _v4 = _v0.b;
-										var x = _v4.a;
-										var _v5 = _v4.b;
-										var y = _v5.a;
-										var _v6 = _v5.b;
-										var z = _v6.a;
-										return _List_fromArray(
-											[x, y, z]);
-									} else {
-										break _v0$5;
-									}
-								default:
-									if (_v0.b.b.b.b && _v0.b.b.b.b.b) {
-										var _v7 = _v0.b;
-										var x = _v7.a;
-										var _v8 = _v7.b;
-										var y = _v8.a;
-										var _v9 = _v8.b;
-										var z = _v9.a;
-										var _v10 = _v9.b;
-										var w = _v10.a;
-										var tl = _v10.b;
-										return (ctr > 1000) ? A2(
-											$elm$core$List$cons,
-											x,
-											A2(
-												$elm$core$List$cons,
-												y,
-												A2(
-													$elm$core$List$cons,
-													z,
-													A2(
-														$elm$core$List$cons,
-														w,
-														A2($elm$core$List$takeTailRec, n - 4, tl))))) : A2(
-											$elm$core$List$cons,
-											x,
-											A2(
-												$elm$core$List$cons,
-												y,
-												A2(
-													$elm$core$List$cons,
-													z,
-													A2(
-														$elm$core$List$cons,
-														w,
-														A3($elm$core$List$takeFast, ctr + 1, n - 4, tl)))));
-									} else {
-										break _v0$5;
-									}
-							}
-						} else {
-							if (_v0.a === 1) {
-								break _v0$1;
-							} else {
-								break _v0$5;
-							}
-						}
-					}
-				}
-				return list;
-			}
-			var _v1 = _v0.b;
-			var x = _v1.a;
-			return _List_fromArray(
-				[x]);
-		}
-	});
-var $elm$core$List$take = F2(
-	function (n, list) {
-		return A3($elm$core$List$takeFast, 0, n, list);
-	});
-var $author$project$Puzzle$Boundary = function (a) {
-	return {$: 'Boundary', a: a};
-};
-var $author$project$Puzzle$Interior = function (a) {
-	return {$: 'Interior', a: a};
-};
-var $author$project$Puzzle$letterWithinWord = F4(
-	function (minIndex, maxIndex, index, letter) {
-		return (_Utils_eq(index, minIndex) || _Utils_eq(index, maxIndex)) ? $author$project$Puzzle$Boundary(letter) : $author$project$Puzzle$Interior(letter);
-	});
-var $elm$core$String$foldr = _String_foldr;
-var $elm$core$String$toList = function (string) {
-	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
-};
-var $author$project$Puzzle$wordToLetters = function (word) {
-	return A2(
-		$elm$core$List$indexedMap,
-		A2(
-			$author$project$Puzzle$letterWithinWord,
-			0,
-			$elm$core$String$length(word) - 1),
-		$elm$core$String$toList(word));
-};
-var $author$project$Puzzle$wordsToLetters = function (words) {
-	if (!words.b) {
-		return _List_Nil;
-	} else {
-		if (!words.b.b) {
-			var firstWord = words.a;
-			return $author$project$Puzzle$wordToLetters(firstWord);
-		} else {
-			var firstWord = words.a;
-			var restWords = words.b;
-			return _Utils_ap(
-				A2(
-					$elm$core$List$take,
-					$elm$core$String$length(firstWord) - 1,
-					$author$project$Puzzle$wordToLetters(firstWord)),
-				$author$project$Puzzle$wordsToLetters(restWords));
-		}
-	}
-};
-var $author$project$Puzzle$fromPuzzle = function (_v0) {
-	var clue = _v0.clue;
-	var words = _v0.words;
-	var seed = _v0.seed;
-	return {
-		clue: clue,
-		letters: $author$project$Puzzle$wordsToLetters(words),
-		puzzleIndex: 0,
-		seed: $elm$random$Random$initialSeed(seed),
-		swapStartIndex: $elm$core$Maybe$Nothing
-	};
-};
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
-var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Puzzle$isInterior = function (letter) {
 	if (letter.$ === 'Interior') {
 		return true;
@@ -5684,14 +5530,216 @@ var $elm$core$Maybe$withDefault = F2(
 			return _default;
 		}
 	});
-var $author$project$Puzzle$init = _Utils_Tuple2(
-	$author$project$Puzzle$shuffle(
-		$author$project$Puzzle$fromPuzzle(
-			A2(
-				$elm$core$Maybe$withDefault,
-				$author$project$Puzzle$defaultPuzzle,
-				$elm$core$List$head($author$project$Data$Puzzle$allPuzzles)))),
-	$elm$core$Platform$Cmd$none);
+var $elm$core$List$takeReverse = F3(
+	function (n, list, kept) {
+		takeReverse:
+		while (true) {
+			if (n <= 0) {
+				return kept;
+			} else {
+				if (!list.b) {
+					return kept;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs,
+						$temp$kept = A2($elm$core$List$cons, x, kept);
+					n = $temp$n;
+					list = $temp$list;
+					kept = $temp$kept;
+					continue takeReverse;
+				}
+			}
+		}
+	});
+var $elm$core$List$takeTailRec = F2(
+	function (n, list) {
+		return $elm$core$List$reverse(
+			A3($elm$core$List$takeReverse, n, list, _List_Nil));
+	});
+var $elm$core$List$takeFast = F3(
+	function (ctr, n, list) {
+		if (n <= 0) {
+			return _List_Nil;
+		} else {
+			var _v0 = _Utils_Tuple2(n, list);
+			_v0$1:
+			while (true) {
+				_v0$5:
+				while (true) {
+					if (!_v0.b.b) {
+						return list;
+					} else {
+						if (_v0.b.b.b) {
+							switch (_v0.a) {
+								case 1:
+									break _v0$1;
+								case 2:
+									var _v2 = _v0.b;
+									var x = _v2.a;
+									var _v3 = _v2.b;
+									var y = _v3.a;
+									return _List_fromArray(
+										[x, y]);
+								case 3:
+									if (_v0.b.b.b.b) {
+										var _v4 = _v0.b;
+										var x = _v4.a;
+										var _v5 = _v4.b;
+										var y = _v5.a;
+										var _v6 = _v5.b;
+										var z = _v6.a;
+										return _List_fromArray(
+											[x, y, z]);
+									} else {
+										break _v0$5;
+									}
+								default:
+									if (_v0.b.b.b.b && _v0.b.b.b.b.b) {
+										var _v7 = _v0.b;
+										var x = _v7.a;
+										var _v8 = _v7.b;
+										var y = _v8.a;
+										var _v9 = _v8.b;
+										var z = _v9.a;
+										var _v10 = _v9.b;
+										var w = _v10.a;
+										var tl = _v10.b;
+										return (ctr > 1000) ? A2(
+											$elm$core$List$cons,
+											x,
+											A2(
+												$elm$core$List$cons,
+												y,
+												A2(
+													$elm$core$List$cons,
+													z,
+													A2(
+														$elm$core$List$cons,
+														w,
+														A2($elm$core$List$takeTailRec, n - 4, tl))))) : A2(
+											$elm$core$List$cons,
+											x,
+											A2(
+												$elm$core$List$cons,
+												y,
+												A2(
+													$elm$core$List$cons,
+													z,
+													A2(
+														$elm$core$List$cons,
+														w,
+														A3($elm$core$List$takeFast, ctr + 1, n - 4, tl)))));
+									} else {
+										break _v0$5;
+									}
+							}
+						} else {
+							if (_v0.a === 1) {
+								break _v0$1;
+							} else {
+								break _v0$5;
+							}
+						}
+					}
+				}
+				return list;
+			}
+			var _v1 = _v0.b;
+			var x = _v1.a;
+			return _List_fromArray(
+				[x]);
+		}
+	});
+var $elm$core$List$take = F2(
+	function (n, list) {
+		return A3($elm$core$List$takeFast, 0, n, list);
+	});
+var $author$project$Puzzle$Boundary = function (a) {
+	return {$: 'Boundary', a: a};
+};
+var $author$project$Puzzle$Interior = function (a) {
+	return {$: 'Interior', a: a};
+};
+var $author$project$Puzzle$letterWithinWord = F4(
+	function (minIndex, maxIndex, index, letter) {
+		return (_Utils_eq(index, minIndex) || _Utils_eq(index, maxIndex)) ? $author$project$Puzzle$Boundary(letter) : $author$project$Puzzle$Interior(letter);
+	});
+var $elm$core$String$foldr = _String_foldr;
+var $elm$core$String$toList = function (string) {
+	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
+};
+var $author$project$Puzzle$wordToLetters = function (word) {
+	return A2(
+		$elm$core$List$indexedMap,
+		A2(
+			$author$project$Puzzle$letterWithinWord,
+			0,
+			$elm$core$String$length(word) - 1),
+		$elm$core$String$toList(word));
+};
+var $author$project$Puzzle$wordsToLetters = function (words) {
+	if (!words.b) {
+		return _List_Nil;
+	} else {
+		if (!words.b.b) {
+			var firstWord = words.a;
+			return $author$project$Puzzle$wordToLetters(firstWord);
+		} else {
+			var firstWord = words.a;
+			var restWords = words.b;
+			return _Utils_ap(
+				A2(
+					$elm$core$List$take,
+					$elm$core$String$length(firstWord) - 1,
+					$author$project$Puzzle$wordToLetters(firstWord)),
+				$author$project$Puzzle$wordsToLetters(restWords));
+		}
+	}
+};
+var $author$project$Puzzle$fromPuzzleIndex = function (puzzleIndex) {
+	var _v0 = A2(
+		$elm$core$Maybe$withDefault,
+		$author$project$Puzzle$defaultPuzzle,
+		A2($elm_community$list_extra$List$Extra$getAt, puzzleIndex, $author$project$Data$Puzzle$allPuzzles));
+	var clue = _v0.clue;
+	var words = _v0.words;
+	var seed = _v0.seed;
+	return $author$project$Puzzle$shuffle(
+		{
+			clue: clue,
+			letters: $author$project$Puzzle$wordsToLetters(words),
+			puzzleIndex: puzzleIndex,
+			seed: $elm$random$Random$initialSeed(seed),
+			swapStartIndex: $elm$core$Maybe$Nothing
+		});
+};
+var $elm$json$Json$Decode$int = _Json_decodeInt;
+var $author$project$Puzzle$decoder = A2(
+	$elm$json$Json$Decode$map,
+	$author$project$Puzzle$fromPuzzleIndex,
+	A2($elm$json$Json$Decode$field, 'puzzleIndex', $elm$json$Json$Decode$int));
+var $author$project$Puzzle$defaultModel = $author$project$Puzzle$fromPuzzleIndex(0);
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $elm$core$Result$withDefault = F2(
+	function (def, result) {
+		if (result.$ === 'Ok') {
+			var a = result.a;
+			return a;
+		} else {
+			return def;
+		}
+	});
+var $author$project$Puzzle$init = function (encodedModel) {
+	return _Utils_Tuple2(
+		A2(
+			$elm$core$Result$withDefault,
+			$author$project$Puzzle$defaultModel,
+			A2($elm$json$Json$Decode$decodeValue, $author$project$Puzzle$decoder, encodedModel)),
+		$elm$core$Platform$Cmd$none);
+};
 var $elm$core$Platform$Cmd$map = _Platform_map;
 var $author$project$Main$mapUpdate = F3(
 	function (toModel, toMsg, _v0) {
@@ -5701,71 +5749,23 @@ var $author$project$Main$mapUpdate = F3(
 			toModel(subModel),
 			A2($elm$core$Platform$Cmd$map, toMsg, subCmd));
 	});
-var $author$project$Main$init = function (_v0) {
-	return A3($author$project$Main$mapUpdate, $author$project$Main$Loaded, $author$project$Main$PuzzleMsg, $author$project$Puzzle$init);
+var $author$project$Main$init = function (encodedPuzzleModel) {
+	return A3(
+		$author$project$Main$mapUpdate,
+		$author$project$Main$Loaded,
+		$author$project$Main$PuzzleMsg,
+		$author$project$Puzzle$init(encodedPuzzleModel));
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$subscriptions = function (_v0) {
 	return $elm$core$Platform$Sub$none;
 };
-var $author$project$Api$SetStorage = function (a) {
-	return {$: 'SetStorage', a: a};
-};
-var $elm$json$Json$Encode$int = _Json_wrap;
-var $elm$json$Json$Encode$object = function (pairs) {
-	return _Json_wrap(
-		A3(
-			$elm$core$List$foldl,
-			F2(
-				function (_v0, obj) {
-					var k = _v0.a;
-					var v = _v0.b;
-					return A3(_Json_addField, k, v, obj);
-				}),
-			_Json_emptyObject(_Utils_Tuple0),
-			pairs));
-};
-var $author$project$Puzzle$encode = function (model) {
-	return $elm$json$Json$Encode$object(
-		_List_fromArray(
-			[
-				_Utils_Tuple2(
-				'puzzleIndex',
-				$elm$json$Json$Encode$int(model.puzzleIndex))
-			]));
-};
-var $elm$core$List$drop = F2(
-	function (n, list) {
-		drop:
-		while (true) {
-			if (n <= 0) {
-				return list;
-			} else {
-				if (!list.b) {
-					return list;
-				} else {
-					var x = list.a;
-					var xs = list.b;
-					var $temp$n = n - 1,
-						$temp$list = xs;
-					n = $temp$n;
-					list = $temp$list;
-					continue drop;
-				}
-			}
-		}
-	});
-var $elm_community$list_extra$List$Extra$getAt = F2(
-	function (idx, xs) {
-		return (idx < 0) ? $elm$core$Maybe$Nothing : $elm$core$List$head(
-			A2($elm$core$List$drop, idx, xs));
-	});
 var $elm$core$Basics$modBy = _Basics_modBy;
 var $author$project$Puzzle$nextPuzzle = function (model) {
 	var newIndex = A2(
 		$elm$core$Basics$modBy,
-		$elm$core$List$length($author$project$Data$Puzzle$allPuzzles) - 1,
+		$elm$core$List$length($author$project$Data$Puzzle$allPuzzles),
 		model.puzzleIndex + 1);
 	var _v0 = A2(
 		$elm$core$Maybe$withDefault,
@@ -5876,6 +5876,32 @@ var $author$project$Puzzle$swapLetters = F2(
 				});
 		}
 	});
+var $author$project$Api$SetStorage = function (a) {
+	return {$: 'SetStorage', a: a};
+};
+var $elm$json$Json$Encode$int = _Json_wrap;
+var $elm$json$Json$Encode$object = function (pairs) {
+	return _Json_wrap(
+		A3(
+			$elm$core$List$foldl,
+			F2(
+				function (_v0, obj) {
+					var k = _v0.a;
+					var v = _v0.b;
+					return A3(_Json_addField, k, v, obj);
+				}),
+			_Json_emptyObject(_Utils_Tuple0),
+			pairs));
+};
+var $author$project$Puzzle$encode = function (model) {
+	return $elm$json$Json$Encode$object(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				'puzzleIndex',
+				$elm$json$Json$Encode$int(model.puzzleIndex))
+			]));
+};
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$Api$encodeOutboundMsg = function (outboundPayload) {
 	var value = outboundPayload.a;
@@ -5890,6 +5916,15 @@ var $author$project$Api$encodeOutboundMsg = function (outboundPayload) {
 };
 var $author$project$Api$outbound = _Platform_outgoingPort('outbound', $elm$core$Basics$identity);
 var $author$project$Api$toOutbound = A2($elm$core$Basics$composeR, $author$project$Api$encodeOutboundMsg, $author$project$Api$outbound);
+var $author$project$Puzzle$updateStorage = function (_v0) {
+	var model = _v0.a;
+	var cmd = _v0.b;
+	return _Utils_Tuple2(
+		model,
+		$author$project$Api$toOutbound(
+			$author$project$Api$SetStorage(
+				$author$project$Puzzle$encode(model))));
+};
 var $author$project$Puzzle$update = F2(
 	function (msg, model) {
 		if (msg.$ === 'LetterClicked') {
@@ -5898,12 +5933,11 @@ var $author$project$Puzzle$update = F2(
 				A2($author$project$Puzzle$swapLetters, index, model),
 				$elm$core$Platform$Cmd$none);
 		} else {
-			return _Utils_Tuple2(
-				$author$project$Puzzle$shuffle(
-					$author$project$Puzzle$nextPuzzle(model)),
-				$author$project$Api$toOutbound(
-					$author$project$Api$SetStorage(
-						$author$project$Puzzle$encode(model))));
+			return $author$project$Puzzle$updateStorage(
+				_Utils_Tuple2(
+					$author$project$Puzzle$shuffle(
+						$author$project$Puzzle$nextPuzzle(model)),
+					$elm$core$Platform$Cmd$none));
 		}
 	});
 var $author$project$Main$update = F2(
@@ -5917,6 +5951,7 @@ var $author$project$Main$update = F2(
 			$author$project$Main$PuzzleMsg,
 			A2($author$project$Puzzle$update, puzzleMsg, puzzle));
 	});
+var $elm$json$Json$Decode$value = _Json_decodeValue;
 var $author$project$Puzzle$NextPuzzle = {$: 'NextPuzzle'};
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
@@ -6076,5 +6111,4 @@ var $author$project$Main$view = function (model) {
 };
 var $author$project$Main$main = $elm$browser$Browser$document(
 	{init: $author$project$Main$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
-_Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
+_Platform_export({'Main':{'init':$author$project$Main$main($elm$json$Json$Decode$value)(0)}});}(this));

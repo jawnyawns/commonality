@@ -17,14 +17,15 @@
 
 <script src="./js/index.js"></script>
 <script>
-  // var storedState = localStorage.getItem('elm-todo-save');
-  // var startingState = storedState ? JSON.parse(storedState) : null;
-  // var app = Elm.Main.init({ flags: startingState });
-  var app = Elm.Main.init();
+  const key = 'storage-v0.0.1';
+  const value = localStorage.getItem(key);
+  const app = Elm.Main.init({
+    flags: value ? JSON.parse(value) : null,
+  });
   app.ports.outbound.subscribe((event) => {
     switch (event.tag) {
       case 'SetStorage':
-        localStorage.setItem('storage-v0.0.1', JSON.stringify(event.value));
+        localStorage.setItem(key, JSON.stringify(event.value));
         break;
     }
   });
