@@ -5207,10 +5207,16 @@ var $elm$json$Json$Decode$field = _Json_decodeField;
 var $author$project$Data$Puzzle$allPuzzles = _List_fromArray(
 	[
 		{
-		clue: 'Rearrange to make a word',
+		clue: 'Rearrange into a word',
 		seed: 0,
 		words: _List_fromArray(
 			['apple'])
+	},
+		{
+		clue: 'Read me',
+		seed: 0,
+		words: _List_fromArray(
+			['novella', 'article', 'essay'])
 	},
 		{
 		clue: 'Mistakes were made',
@@ -5237,13 +5243,13 @@ var $author$project$Data$Puzzle$allPuzzles = _List_fromArray(
 			['miso', 'oxtail', 'lentil'])
 	},
 		{
-		clue: 'Food preparation techniques',
+		clue: 'Food prep techniques',
 		seed: 0,
 		words: _List_fromArray(
 			['chop', 'puree', 'emulsify'])
 	},
 		{
-		clue: 'Common symbols you might type',
+		clue: 'Symbols you might type',
 		seed: 0,
 		words: _List_fromArray(
 			['slash', 'hashtag', 'greaterthan'])
