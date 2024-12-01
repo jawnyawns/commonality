@@ -5231,7 +5231,7 @@ var $author$project$Data$Puzzle$allPuzzles = _List_fromArray(
 			['mouse', 'earbud', 'display'])
 	},
 		{
-		clue: 'In the mood for soup?',
+		clue: 'Soup, anyone?',
 		seed: 0,
 		words: _List_fromArray(
 			['miso', 'oxtail', 'lentil'])
