@@ -5246,7 +5246,7 @@ var $author$project$Data$Puzzle$allPuzzles = _List_fromArray(
 		clue: 'Common symbols you might type',
 		seed: 0,
 		words: _List_fromArray(
-			['plus', 'slash', 'hashtag', 'greaterthan'])
+			['slash', 'hashtag', 'greaterthan'])
 	}
 	]);
 var $author$project$Puzzle$defaultPuzzle = {
