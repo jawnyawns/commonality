@@ -34,7 +34,7 @@ body {
 .puzzle-letters {
     display: flex;
     justify-content: center;
-    gap: 2px;
+    gap: 1px;
 }
 
 .puzzle-letter {
@@ -48,7 +48,7 @@ body {
     font-weight: 700;
     cursor: default;
     font-size: 24px;
-    padding: 3px 12px;
+    padding: 2px 4px;
     color: #444;
 }
 
@@ -56,7 +56,7 @@ body {
     font-weight: 400;
     cursor: pointer;
     font-size: 24px;
-    padding: 1px 6px;
+    padding: 0 3px;
     border: 2px solid #999;
     background: #fff;
     border-radius: 2px;
