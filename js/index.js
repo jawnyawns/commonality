@@ -5253,6 +5253,18 @@ var $author$project$Data$Puzzle$allPuzzles = _List_fromArray(
 		seed: 0,
 		words: _List_fromArray(
 			['novella', 'article', 'essay'])
+	},
+		{
+		clue: 'Potential pets',
+		seed: 0,
+		words: _List_fromArray(
+			['terrier', 'rock', 'koifish'])
+	},
+		{
+		clue: 'Trees',
+		seed: 0,
+		words: _List_fromArray(
+			['apple', 'elm', 'maple'])
 	}
 	]);
 var $author$project$Puzzle$defaultPuzzle = {
